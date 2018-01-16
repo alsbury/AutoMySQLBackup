@@ -405,57 +405,6 @@ parse_config_file () {
   fi
 }
 
-#precheck
-echo "### Checking archive files for existence, readability and integrity."
-echo
-
-precheck_files=( automysqlbackup 880dca1b4cfe3ac0513561af0e254dd0
-automysqlbackup.conf 3147a5a3c0e0cce1dca11227dad9c69d
-README b17740fcd3a5f8579b907a42249a83cd
-LICENSE 39bba7d2cf0ba1036f2a6e2be52fe3f0
-)
-
-n=$(( ${#precheck_files[@]}/2 ))
-i=0
-while [ $i -lt $n ]; do
-  printf "${precheck_files[$((2*$i))]} ... "
-  if [ -r "${precheck_files[$((2*$i))]}" ]; then
-    printf "exists and is readable ... "
-  else
-    printf "failed\n"
-    exit 1
-  fi
-  if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	# Linux
-  	MD5_CHECK="md5sum --check"
-  elif [[ "$OSTYPE" == "darwin"* ]]; then
-	# Mac OSX
-  	MD5_CHECK="md5 -r"
-  elif [[ "$OSTYPE" == "cygwin" ]]; then
-	# POSIX compatibility layer and Linux environment emulation for Windows
-  	MD5_CHECK="md5sum --check"
-  elif [[ "$OSTYPE" == "msys" ]]; then
-	# Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-  	MD5_CHECK="md5sum --check"
-  elif [[ "$OSTYPE" == "win32" ]]; then
-	# I'm not sure this can happen.
-  	MD5_CHECK="md5sum --check"
-  elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	# FreeBSD
-  	MD5_CHECK="md5sum --check"
-  else
-    echo "Unable to recognize system. I don't know which md5 check I should use."
-    exit 1
-  fi
-  if echo "${precheck_files[$((2*$i+1))]}  ${precheck_files[$((2*$i))]}" | $MD5_CHECK >/dev/null 2>&1; then
-    printf "md5sum okay :)\n"
-  else
-    printf "md5sum failed :(\n"
-    exit 1
-  fi
-  let i+=1
-done
-
 echo
 printf 'Select the global configuration directory [/etc/automysqlbackup]: '
 read configdir

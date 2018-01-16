@@ -39,12 +39,3 @@ After that command give your mysql root password and you're done. If you want to
 
 
 Backup your mysql server with ease by using this adjusted script. If you encounter any errors feel free to [drop an issue](https://github.com/sixhop/AutoMySQLBackup/issues/new). :) (English or German)
-
-For more Information check out [managed hosting by sixhop.net](http://www.sixhop.net/).
-
-Deutsche Version
-================
-
-Mit diesem Skript können Sie von Ihren Datenbanken auf Ihrem MySQL Server Backups erstellen. Jede MySQL Datenbank mit allen Tables wird dabei standardmäßig in einer eigenen Datei gespeichert, sodass Sie auch einzelne Datenbanken wiederherstellen können.
-
-Mit Hilfe der Anpassung für die Benutzung von login path zur Authentifizierung haben sie die Möglichkeit Ihr Passwort so zu speichern, dass Ihre Daten für den Login nicht bei jedem Aufruf des Backupskripts auf der Konsole und damit auch in der Prozessliste auftaucht. Nach der erfolgreichen Konfiguration reicht der Befehl *automysqlbackup* auf der Konsole.

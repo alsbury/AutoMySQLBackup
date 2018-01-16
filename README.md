@@ -33,18 +33,19 @@ To install it manually (the hard way).
 
 Automysqlbackup can be run a number of ways, you can choose which is best for you.
 
-1. Create a script as below called runmysqlbackup using the lines below:
+1. Create a script as below called `runmysqlbackup` using the lines below:
 
-#~~~~ Copy From Below Here ~~~~
+```
 #!/bin/sh
 
 /usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf
+```
 
+```
 chown root.root /var/backup/db* -R
 find /var/backup/db* -type f -exec chmod 400 {} \;
 find /var/backup/db* -type d -exec chmod 700 {} \;
-
-#~~~~~ Copy To Above Here ~~~~
+```
 
 2. Save it to a suitable location or copy it to your /etc/cron.daily folder. 
 
@@ -52,14 +53,14 @@ find /var/backup/db* -type d -exec chmod 700 {} \;
 
 
 The backup can be run from the command line simply by running the following command.
-
-  automysqlbackup /etc/automysqlbackup/myserver.conf
-
+```
+automysqlbackup /etc/automysqlbackup/myserver.conf
+```
 If you don't supply an argument for automysqlbackup, the default configuration
 in the program automysqlbackup will be used unless a global file
-
-  CONFIG_configfile="/etc/automysqlbackup/automysqlbackup.conf"
-
+```
+CONFIG_configfile="/etc/automysqlbackup/automysqlbackup.conf"
+```
 exists.
 
 You can just copy the supplied automysqlbackup.conf as many times as you want
@@ -71,28 +72,28 @@ As of version 3.0 we have added differential backups using the program diff. In 
 effort to make the reconstruction of the full archives more user friendly, we
 added new functionality to the script. Therefore, while preserving the old syntax,
 we created options for the script, so that the new functions can be accessed.
-
+```
 Usage automysqlbackup options -cblh
 -c CONFIG_FILE  Specify optional config file.
 -b      Use backup method.
 -l      List manifest entries.
 -h      Show this help.
-
+```
 If you use these options, you have to specify everything according to them and can't
 mix the old syntax with the new one. Example:
 
 before (still valid!):
-
-  >> automysqlbackup "myconfig.conf"
-
+```
+automysqlbackup "myconfig.conf"
+```
 now:
-
-  >> automysqlbackup -c "myconfig.conf" -b
-
+```
+automysqlbackup -c "myconfig.conf" -b
+```
 which is equivalent to
-
-  >> automysqlbackup -bc "myconfig.conf"
-
+```
+automysqlbackup -bc "myconfig.conf"
+```
 or in English: The order of the options doesn't matter, however those options expecting
 arguments, have to be placed right before the argument (as seen above).
 
@@ -113,11 +114,12 @@ choose what you want to be done with/to those files. At the moment the options a
 !! "automysqlbackup" program contains a default configuration that should not be changed:
 
 The global config file which overwrites the default configuration is located here
-"/etc/automysqlbackup/automysqlbackup.conf" by default.
+`/etc/automysqlbackup/automysqlbackup.conf` by default.
 
 Please take a look at the supplied "automysqlbackup.conf" for information about the configuration options.
 
 Default configuration
+```
 CONFIG_configfile="/etc/automysqlbackup/automysqlbackup.conf"
 CONFIG_backup_dir='/var/backup/db'
 CONFIG_do_monthly="01"
@@ -144,6 +146,7 @@ CONFIG_mail_maxattsize=4000
 CONFIG_mail_address='root'
 CONFIG_encrypt='no'
 CONFIG_encrypt_password='password0123'
+```
 
 !! automysqlbackup (the shell program) accepts one parameter, the filename of a configuration file. The entries in there will supersede all others.
 
@@ -155,7 +158,7 @@ Please take a look at the supplied "automysqlbackup.conf" for information about 
 
 To decrypt run (replace bz2 with gz if using gzip):
 
-openssl enc -aes-256-cbc -d -in encrypted_file_name(ex: *.enc.bz2) -out outputfilename.bz2 -pass pass:PASSWORD-USED-TO-ENCRYPT
+`openssl enc -aes-256-cbc -d -in encrypted_file_name(ex: *.enc.bz2) -out outputfilename.bz2 -pass pass:PASSWORD-USED-TO-ENCRYPT`
 
 
 
@@ -181,8 +184,12 @@ gunzip file.gz (or bunzip2 file.bz2)
 Next you will need to use the mysql client to restore the DB from the sql file.
 
 eg.
+```
   mysql --user=username --pass=password --host=dbserver database < /path/file.sql
+```
 or
+```
   mysql --user=username --pass=password --host=dbserver -e "source /path/file.sql" database
+```
 
 NOTE: Make sure you use "<" and not ">" in the above command because you are piping the file.sql to mysql and not the other way around.

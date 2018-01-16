@@ -1,9 +1,9 @@
 # AutoMySQLBackup
--------------------------
- A fork and further development of AutoMySQLBackup from sourceforge. http://sourceforge.net/projects/automysqlbackup/ 
+
+A fork and further development of AutoMySQLBackup from sourceforge. http://sourceforge.net/projects/automysqlbackup/ 
 
 ## DISCLAIMER
--------------------------
+
 I take no resposibility for any data loss or corruption when using this script.
 This script will not help in the event of a hard drive crash. If a copy of the
 backup has not been stored offline or on another PC. You should copy your backups
@@ -12,7 +12,7 @@ offline regularly for best protection.
 Happy backing up...
 
 ## INSTALL
--------------------------
+
 Extract the package into a directory. If you are reading this you have probably done
 this already.
 
@@ -30,7 +30,6 @@ To install it manually (the hard way).
 6. See usage section.
 
 # USAGE
--------------------------
 
 Automysqlbackup can be run a number of ways, you can choose which is best for you.
 
@@ -67,7 +66,7 @@ You can just copy the supplied automysqlbackup.conf as many times as you want
 and use for separate configurations, i.e. for example different mysql servers.
 
 ## !!! NEW !!!
-----------
+
 As of version 3.0 we have added differential backups using the program diff. In an
 effort to make the reconstruction of the full archives more user friendly, we
 added new functionality to the script. Therefore, while preserving the old syntax,
@@ -110,7 +109,6 @@ choose what you want to be done with/to those files. At the moment the options a
 
 
 ## CONFIGURATION OPTIONS
--------------------------
 
 !! "automysqlbackup" program contains a default configuration that should not be changed:
 
@@ -154,7 +152,6 @@ Please take a look at the supplied "automysqlbackup.conf" for information about 
 
 
 ## ENCRYPTION
--------------------------
 
 To decrypt run (replace bz2 with gz if using gzip):
 
@@ -163,7 +160,6 @@ openssl enc -aes-256-cbc -d -in encrypted_file_name(ex: *.enc.bz2) -out outputfi
 
 
 ## BACKUP ROTATION
--------------------------
 
 Daily Backups are rotated weekly.
 Weekly Backups are run on fridays, unless otherwise specified via CONFIG_do_weekly.
@@ -176,7 +172,6 @@ Suggestion: It may be a good idea to copy monthly backups offline or to another 
 
 
 ## RESTORING
--------------------------
 
 Firstly you will need to uncompress the backup file and decrypt it if encryption was used (see encryption section).
 
